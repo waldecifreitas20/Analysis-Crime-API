@@ -19,10 +19,22 @@ const database = new Sequelize(
     }
 );
 
+const initModels = () => {
+    const modelPaths = require('../app/models');
+
+    modelPaths.forEach(path => {
+        require(path);
+    });
+};
 const syncDatabase = async () => await database.sync();
+
+const initDatabase = async () => {
+    initModels();
+    await syncDatabase();
+}
 
 module.exports = {
     Sequelize,
     database,
-    syncDatabase
+    initDatabase
 }

@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
 
-const {syncDatabase} = require('./database/sequelize');
+const {initDatabase} = require('./database/sequelize');
 require('./database/connection');
 
-syncDatabase();
+initDatabase();
 
 module.exports = app
