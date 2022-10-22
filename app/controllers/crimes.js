@@ -6,19 +6,25 @@ module.exports = {
         return res.status(200).send({url : req.url});
     },
     
-    especificCrime : async function(req, res) {
+    searchCrimes : async function(req, res) {
         const searchParams = {
-            category : req.query.crime,
-            year: req.query.year || 2020,
+            category: req.params.category,
+            year: req.query.year || 2021,
+            month : req.query.month,
+            period : {
+                start : req.query.start_month,
+                end : req.query.end_month,
+            }
         }
-        return res.status(200).send({url : req.url});
-    },
 
-    allCrimes : async function(req, res) {
-        const searchParams = {
-            category : req.query.crime,
-            year: req.query.year || 2020,
+        let response;
+
+        if (!searchParams.category) {
+            response = await services.searchAll(searchParams);
+        } else {
+            response = await services.searchEspecificCrime(searchParams);
         }
-        return res.status(200).send({url : req.url});
+
+        return res.status(200).send(searchParams);
     },
 }
