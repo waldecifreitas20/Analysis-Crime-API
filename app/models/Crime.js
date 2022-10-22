@@ -1,10 +1,6 @@
 const { database, Sequelize: dataType } = require('../../database/sequelize');
 
 const Crime = database.define('Crimes', {
-    category: {
-        type: dataType.STRING(30),
-        allowNull: false
-    },
     latitude: {
         type: dataType.FLOAT(11)
     },
@@ -13,10 +9,15 @@ const Crime = database.define('Crimes', {
     },
     year: {
         type: dataType.INTEGER
-    },
-    month: {
-        type: dataType.INTEGER
     }
 });
+
+
+const Month = require('./Month');
+const Category = require('./Category');
+
+Crime.belongsTo(Month);
+Crime.belongsTo(Category);
+
 
 module.exports = Crime;
