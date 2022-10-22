@@ -4,7 +4,7 @@ const routes = require('./routes');
 module.exports = function (app) {
 
     app.get(routes.fillDatabase, controller.fillDatabase);
-    app.get(routes.crimes.allCrimes, controller.search);
-    app.get(routes.crimes.especificCrime, controller.search);
+    app.get(routes.crimes.allCrimes, controller.allCrimes);
+    app.get(routes.crimes.especificCrime, controller.especificCrime);
 
 }
