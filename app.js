@@ -1,9 +1,12 @@
 const express = require('express');
 const app = express();
 
-const {initDatabase} = require('./database/sequelize');
 require('./database/connection');
+const { initDatabase } = require('./database/sequelize');
 
 initDatabase();
+
+const initRoutes = require('./routes/crimes');
+initRoutes(app);
 
 module.exports = app
