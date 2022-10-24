@@ -1,6 +1,6 @@
 const { database, Sequelize: dataType } = require('../../database/sequelize');
 
-const Crime = database.define('Crimes', {
+const Crime = database.define('crimes', {
     latitude: {
         type: dataType.FLOAT(11)
     },
