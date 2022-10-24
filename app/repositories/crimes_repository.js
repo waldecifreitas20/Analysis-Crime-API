@@ -20,5 +20,22 @@ module.exports = {
                 error : error
             }
         }
+    },
+
+    getAllOfMonth: async function(month, year) {
+        try {
+            const crimes = await Crime.findAll({
+                where: {
+                    year: year,
+                    monthId: month,
+                },
+                include: [Category, Month]
+            });
+
+            return crimes;
+
+        } catch (error) {
+            
+        }
     }
 }
