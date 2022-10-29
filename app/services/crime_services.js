@@ -1,4 +1,5 @@
 const repository = require('../repositories/crimes_repository');
+const { getCrimesStats } = require('../../utils/crime');
 
 const MONTH_SEARCH = 0;
 const PERIOD_SEARCH = 1;
@@ -17,6 +18,7 @@ const getSearchMode = searchParams => {
 }
 
 
+
 module.exports = {
     searchEspecificCrime: async function (params) {
         return {
@@ -32,13 +34,24 @@ module.exports = {
 
         if (searchMode == MONTH_SEARCH) {
             response = await repository.getAllOfMonth(params.month, params.year);
-        } else if (searchMode == GENERIC_SEARCH) {
+        } else if (searchMode == PERIOD_SEARCH) {
+            response = await repository.getAllAtPeriod(params.period, params.year);
+        } else {
             response = await repository.getAllOfYear(params.year);
         }
 
+        const crimeStats = getCrimesStats(response);
+
+
         return {
             status: 200,
-            crimes: response
+            results: crimeStats.total,
+            year: params.year,
+            period: params.period,
+            crimes: {
+                robbery: crimeStats.robbery
+            },
+            response
         };
     },
 
