@@ -25,6 +25,6 @@ module.exports = {
             response = await services.searchEspecificCrime(searchParams);
         }
 
-        return res.status(200).send(searchParams);
+        return res.status(200).send(response);
     },
 }

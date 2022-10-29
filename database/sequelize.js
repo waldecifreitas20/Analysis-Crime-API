@@ -14,7 +14,6 @@ const database = new Sequelize(
             timestamps: false,
             underscored: false,
             underscoredAll: false,
-            freezeTableName: true
         }
     }
 );
