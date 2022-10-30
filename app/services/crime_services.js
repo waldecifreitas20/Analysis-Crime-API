@@ -39,8 +39,8 @@ module.exports = {
         } else {
             response = await repository.getAllOfYear(params.year);
         }
-
-        const crimeStats = getCrimesStats(response);
+        
+        const crimeStats = getCrimesStats(response, params.period);
 
 
         return {
@@ -48,10 +48,7 @@ module.exports = {
             results: crimeStats.total,
             year: params.year,
             period: params.period,
-            crimes: {
-                robbery: crimeStats.robbery
-            },
-            response
+            crimes: crimeStats.crimes
         };
     },
 
