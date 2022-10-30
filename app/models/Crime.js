@@ -8,7 +8,7 @@ const Crime = database.define('crimes', {
         type: dataType.FLOAT(11)
     },
     year: {
-        type: dataType.INTEGER
+        type: dataType.STRING(4)
     }
 });
 
