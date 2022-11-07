@@ -43,7 +43,7 @@ const calculateMonthlyAverage = (crimes = [], period = {}) => {
     return Number(average.toFixed(2));
 };
 
-const calculateGrowth = (crimes, period) => {
+const calculateGrowth = (crimes, period) => { 
     const current = getTotalCrimeByMonth(period.end, crimes);
     const past = getTotalCrimeByMonth(period.start, crimes)
 
@@ -51,9 +51,9 @@ const calculateGrowth = (crimes, period) => {
         return current;
     }
     
-    console.log(past);
     return (current - past) / past;
 }
+
 module.exports = {
     getCrimesStats: function (crimes = [], period) {
 
