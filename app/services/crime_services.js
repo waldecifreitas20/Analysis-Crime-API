@@ -36,7 +36,7 @@ module.exports = {
     searchAll: async function (period) {
         const response = await repository.getAll(period);
 
-        const crimeStats = stats.getAllCrimeStats(response);
+        const crimeStats = stats.getAllCrimeStats(response, period);
 
         return {
             status: 200,
