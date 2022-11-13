@@ -1,5 +1,5 @@
 module.exports = {
-    especificCrime : '/crime/:category',
-    allCrimes : '/all-crimes',
+    advancedSearch : '/crimes/advanced-search',
+    allCrimes : '/crimes/all',
     fillDatabase : '/fill-database'
 }
