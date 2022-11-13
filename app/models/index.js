@@ -1,3 +1,8 @@
+/* 
+    THIS FILE SEARCHS EVERY MODEL AND RETURN THEIR ABSOLUTE PATHS.
+    IT IS IMPORTANT TO SYNCRONIZE DATABASE
+*/
+
 const { getFileNames, getAboslutePath } = require('../../utils/utils');
 const modelsPath = getAboslutePath('app', 'models');
 
