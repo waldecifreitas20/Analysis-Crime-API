@@ -1,51 +1,73 @@
 const repository = require('../repositories/crimes_repository');
-const { getCrimesStats } = require('../../utils/crime');
+const stats = require('../../utils/crime');
 
-const MONTH_SEARCH = 0;
-const PERIOD_SEARCH = 1;
-const GENERIC_SEARCH = 2;
+const getQuery = params => {
+    let query = 'SELECT * FROM crimes';
+    let operator = 'WHERE';
 
-const getSearchMode = searchParams => {
-
-    if (searchParams.month != undefined) {
-        return MONTH_SEARCH;
-    }
-    if (!!searchParams.period.start || !!searchParams.period.end) {
-        return PERIOD_SEARCH;
+    if (!!params.type) {
+        query += ` ${operator} type='${params.type.toUpperCase()}'`;
+        operator = 'AND';
     }
 
-    return GENERIC_SEARCH;
+    if (!!params.year) {
+        query += ` ${operator} year='${params.year}'`;
+        operator = 'AND';
+    }
+
+    if (!!params.onlyDomestic) {
+        query += ` ${operator} domestic='${params.onlyDomestic}'`;
+        operator = 'AND';
+    }
+
+    // It is not possible search for month and period at same time
+    if (!!params.month) {
+        query += ` ${operator} month='${params.month}'`;
+
+    } else if (!!params.period.start && !!params.period.end) {
+        query += ` ${operator} month >= '${params.period.start}'`;
+        query += ` AND month <= '${params.period.end}'`;
+    }
+
+    return query;
 }
 
-
-
 module.exports = {
-    searchEspecificCrime: async function (params) {
+    searchAll: async function (period) {
+        const response = await repository.getAll(period);
+
+        const crimeStats = stats.getAllCrimeStats(response);
+
         return {
             status: 200,
-            response: getSearchMode(params)
+            results: response.length,
+            period,
+            stats: crimeStats,
         };
     },
 
-    searchAll: async function (params) {
-        let response;
+    advancedSearch: async function (params) {
+        let searchQuery = getQuery(params);
+        let response = await repository.advancedSearch(searchQuery);
 
-        const searchMode = getSearchMode(params);
 
-        if (searchMode == MONTH_SEARCH) {
-            response = await repository.getAllOfMonth(params.month, params.year);
-        } else if (searchMode == PERIOD_SEARCH) {
-            response = await repository.getAllAtPeriod(params.period, params.year);
-        } else {
-            response = await repository.getAllOfYear(params.year);
+        let crimeStats;
+        if (!!params.month) {
+            const crimeStats = stats.getCrimeStatsByMonth(response, params.month);
+            return {
+                status: 200,
+                results: crimeStats.total,
+                year: params.year,
+                month: Number(params.month),
+                crimes: crimeStats.crimes
+            };
         }
-        
-        const crimeStats = getCrimesStats(response, params.period);
+        crimeStats = stats.getCrimeStats(response, params.period);
 
 
         return {
             status: 200,
-            results: crimeStats.total,
+            results: response.length,
             year: params.year,
             period: params.period,
             crimes: crimeStats.crimes
