@@ -1,64 +1,40 @@
 const Crime = require('../models/Crime');
-const Category = require('../models/Category');
-const Month = require('../models//Month');
 const { Op } = require('sequelize');
 
 module.exports = {
 
-    getAllOfYear: async function (year) {
+    getAll: async function (period) {
         try {
-            const crimes = await Crime.findAll({
+            return await Crime.findAll({
                 where: {
-                    year: year
+                    year: { [Op.between]: [period.start, period.end], }
                 },
-                include: [Category, Month]
             });
-
-            return crimes;
         } catch (error) {
-            return {
-                status : 400,
-                error : error
-            }
+            console.log(error);
+            return false;
         }
     },
 
-    getAllOfMonth: async function(month, year) {
+    saveCrime: async function (crime) {
         try {
-            const crimes = await Crime.findAll({
-                where: {
-                    year: year,
-                    monthId: month,
-                },
-                include: [Category, Month]
-            });
-
-            return crimes;
-
+            await Crime.create(crime);
+            return true;
         } catch (error) {
-            return {
-                status : 400,
-                error : error
-            }
+            return false;
         }
     },
 
-    getAllAtPeriod : async function(period, year) {
+    advancedSearch: async function (query) {
         try {
-            const crimes = await Crime.findAll({
-                where : {
-                    year : year, 
-                    monthId: {[Op.between] : [period.start, period.end]}   
-                },
-                include: [Category, Month]
-            });
+            const { database } = require('../../database/sequelize');
+            const [result, metadata] = await database.query(query);
+            //console.log(result);
 
-            return crimes;
+            return result;
         } catch (error) {
-            return {
-                status : 400,
-                error : error
-            }
+              console.log(error);
+            return false;
         }
     }
 }
