@@ -7,15 +7,11 @@ const getCrimesByCategory = (category = String, crimes = []) => {
 }
 
 const getTotalCrimeByMonth = (month, crimes = []) => {
-    let total = 0;
-    crimes.forEach(crime => {
-        const _month = crime.month;
-        if (month == _month) {
-            ++total;
-        }
-    });
+    return crimes.filter(crime => month == crime.month).length;
+}
 
-    return total;
+const getTotalCrimeByYear = (year, crimes = []) => {
+    crimes.filter(crime => crime.year == year).length;
 }
 
 const getCategories = (crimes = []) => {
@@ -42,6 +38,13 @@ const calculateMonthlyAverage = (crimes = [], period = {}) => {
 
     return Number(average.toFixed(2));
 };
+
+const calculateYearlyAverage = (crimes = [], years = {}) => {
+    const start = Number(years.start);
+    const end = Number(years.end);
+    const average = crimes.length / (end - start + 1);
+    return Number(average.toFixed(2));
+}
 
 const calculateGrowth = (crimes, period) => {
     const current = getTotalCrimeByMonth(period.end, crimes);
@@ -82,7 +85,7 @@ module.exports = {
         return stats;
     },
 
-    getCrimeStatsByMonth: function (crimes=[], month='') {
+    getCrimeStatsByMonth: function (crimes = [], month = '') {
         let stats = {
             total: crimes.length,
 
@@ -97,12 +100,21 @@ module.exports = {
         return stats;
     },
 
-    getAllCrimeStats: function (crimes) {
-        let months = { start: '01', end: '12' };
+    getAllCrimeStats: function (crimes, period) {
+        let months; 
+        if (period.end == '2022') {
+            months = { start: 1, end: 10 };
+        } else {
+            months = { start: 1, end: 12 };
+        }
+ 
+        const yearly_average = calculateYearlyAverage(crimes, period);
+        const monthly_average = yearly_average / (months.end - months.start+1);
         return {
             first_month: getTotalCrimeByMonth(months.start, crimes),
             last_month: getTotalCrimeByMonth(months.end, crimes),
-            monthly_average: calculateMonthlyAverage(crimes, months),
+            yearly_average,
+            monthly_average: Number(monthly_average.toFixed(2)),
             growth_rate: calculateGrowth(crimes, months)
         }
     }
