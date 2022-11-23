@@ -5,7 +5,7 @@ const extenalServices = require('../services/extenals');
 module.exports = {
     fillDatabase: async function (req, res) {
         const year = req.query.year;
-        const type = req.params.type.toUpperCase();
+        const type = req.params.type;
 
         extenalServices.fillDatabase(year, type);
 
@@ -17,7 +17,7 @@ module.exports = {
     advancedSearch: async function (req, res) {
         const searchParams = {
             onlyDomestic: req.query.domestic,
-            type: req.query.type.toUpperCase(),
+            type: req.query.type,
             year: req.query.year || 2022,
             month: req.query.month,
             period: {
