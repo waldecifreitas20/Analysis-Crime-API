@@ -15,7 +15,7 @@ module.exports = {
     advancedSearch: async function (req, res) {
         const searchParams = {
             onlyDomestic: req.query.domestic,
-            type: req.query.type,
+            type: req.query.type.toUpperCase(),
             year: req.query.year || 2022,
             month: req.query.month,
             period: {
