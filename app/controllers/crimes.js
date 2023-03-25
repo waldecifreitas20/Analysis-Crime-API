@@ -14,7 +14,7 @@ module.exports = {
         });
     },
 
-    refinedSearch: async function (req, res) {
+    crimesInYear: async function (req, res) {
         const searchingParams = {
             onlyDomestic: req.query.domestic,
             type: req.query.type,

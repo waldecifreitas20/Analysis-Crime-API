@@ -3,7 +3,7 @@ const routes = require('./routes');
 
 module.exports = function (app) {
     
-    app.get(routes.advancedSearch, controller.advancedSearch);
+    app.get(routes.crimesInYear, controller.crimesInYear);
     app.get(routes.allCrimes, controller.allCrimes);
     
     // Use this route if your database is empty
