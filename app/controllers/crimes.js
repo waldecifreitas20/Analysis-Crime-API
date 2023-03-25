@@ -32,8 +32,8 @@ module.exports = {
 
     allCrimes: async function (req, res) {
         const period = {
-            start: req.query.start_year || '2019',
-            end: req.query.end_year || '2022',
+            start: req.query.initial_year || '2019',
+            end: req.query.final_year || '2022',
         };
         const response = await services.searchAll(period);
         return res.status(response.status).send(response);

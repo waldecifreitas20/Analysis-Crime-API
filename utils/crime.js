@@ -62,7 +62,6 @@ module.exports = {
 
         let stats = {
             total: crimes.length,
-
             crimes: {}
         };
 
@@ -100,7 +99,7 @@ module.exports = {
         return stats;
     },
 
-    getAllCrimeStats: function (crimes, period) {
+    getAllCrimesStats: function (crimes, period) {
         let months; 
         if (period.end == '2022') {
             months = { start: 1, end: 10 };
