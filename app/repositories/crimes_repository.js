@@ -3,7 +3,7 @@ const { Op } = require('sequelize');
 
 module.exports = {
 
-    getAll: async function (period) {
+    getAllInAPeriod: async function (period) {
         try {
             return await Crime.findAll({
                 where: {
@@ -25,12 +25,11 @@ module.exports = {
         }
     },
 
-    advancedSearch: async function (query) {
+    executeQuery: async function (query) {
         try {
             const { database } = require('../../database/sequelize');
             const [result, metadata] = await database.query(query);
             //console.log(result);
-
             return result;
         } catch (error) {
               console.log(error);
