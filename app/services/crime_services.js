@@ -42,10 +42,7 @@ const getQuery = params => {
 
 module.exports = {
 
-    /* 
-        It searchs general stats of all crimes 
-        together during a period of years
-    */
+    // It searchs general stats of all crimes together during a period of years
     searchGeneralStats: async function (period) {
         const repositoryResponse = await repository.getAllInAPeriod(period);
         const crimeStats = stats.getGeneralStats(repositoryResponse, period);
@@ -79,12 +76,9 @@ module.exports = {
     // It searchs stats of each crimes during a month or more in a year
     searchCrimeStatsInAPeriod: async function (params) {
         let query = getQuery(params);
-        console.log('');
-        logger.info('TRANSACTION STARTED');
-        let repositoryResponse = await repository.executeQuery(query);
-        logger.info('TRANSACTION COMPLETED');
 
-        logger.info('CALCULATING CRIMES STATISTICS');
+        let repositoryResponse = await repository.executeQuery(query);
+
         let crimeStats = stats.getCrimeStats(repositoryResponse, params.period);
 
         return {

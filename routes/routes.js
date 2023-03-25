@@ -1,5 +1,5 @@
 module.exports = {
-    crimesInYear : '/crimes/:year',
+    crimesInYear : '/crimes/in/:year',
     allCrimes : '/crimes/all',
-    fillDatabase : '/fill-database'
+    fillDatabase : '/fill-database/:type/:year'
 }
