@@ -1,10 +1,11 @@
-const router = require('express').Router();
-
 const controller = require('../app/controllers/crimes');
+const routes = require('./routes');
 
-router.get('/fill-database', controller.fillDatabase);
-router.get('/search', controller.search);
-
-module.exports = function(app) {
-    app.use('/crimes', router);
+module.exports = function (app) {
+    
+    app.get(routes.advancedSearch, controller.advancedSearch);
+    app.get(routes.allCrimes, controller.allCrimes);
+    
+    // Use this route if your database is empty
+    app.get(routes.fillDatabase, controller.fillDatabase);
 }
