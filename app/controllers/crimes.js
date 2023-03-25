@@ -4,14 +4,17 @@ const extenalServices = require('../services/extenals');
 
 module.exports = {
     fillDatabase: async function (req, res) {
-        const year = req.query.year;
-        const type = req.params.type;
+        const year = req.params.year;
+        const type = req.params.crimeType;
+
 
         extenalServices.fillDatabase(year, type);
 
         return res.status(200).send({
             message: 'Request created. It has already been filling the database'
         });
+
+
     },
 
     advancedSearch: async function (req, res) {
