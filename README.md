@@ -9,7 +9,7 @@
  <li><a href="#how-to-install">How To Install</a> </li>
  <li><a href="#how-to-use">How To Use</a> </li>
  <ol>
-  <li><a href="#finding-types-of-crime">Finding Types of crimes</a></li>
+  <li><a href="#finding-types-of-crimes">Finding Types of crimes</a></li>
   <li>Fill your database</li>
  </ol> 
  <li><a href="#using-another-dataset">Using Another Dataset</a> </li>
