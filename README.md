@@ -5,11 +5,15 @@
  <a href="#requirements">Requirements</a> •
  <a href="#getting-start">Getting Start</a> • 
  <a href="#how-to-use">How to use</a> • 
- <a href="#how-to-use">Project Status</a> • 
+ <a href="#how-to-use">Project Status</a> 
 </p>
 
 <h1>Requirements</h1>
-<p></p>
+<ul>
+ <li>NodeJs v16.13.0 or newer. Link to download: https://nodejs.org/en/download</li>
+ <li>Git v2.28.0 or newer. Link to download: https://git-scm.com/downloads</li>
+ <li>NPM v8.19.0 or newer.</li>
+</ul>
 
 <h1>Getting Start</h1>
 <p></p>
