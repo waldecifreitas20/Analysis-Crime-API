@@ -10,13 +10,35 @@
 
 <h1>Requirements</h1>
 <ul>
- <li>NodeJs v16.13.0 or newer. Link to download: https://nodejs.org/en/download</li>
- <li>Git v2.28.0 or newer. Link to download: https://git-scm.com/downloads</li>
- <li>NPM v8.19.0 or newer.</li>
+ <li>NodeJs installed v16.13.0 or newer. Link to download: https://nodejs.org/en/download</li>
+ <li>Git installed v2.28.0 or newer. Link to download: https://git-scm.com/downloads</li>
+ <li>NPM installed v8.19.0 or newer.</li>
 </ul>
 
-<h1>Getting Start</h1>
-<p></p>
+<h2>Getting Start</h1>
+
+### How to install
+<ol>
+ <li>Clone the project</li>
+ ```
+ git clone https://github.com/waldecifreitas20/CrimeStats.git
+ ```
+ <li>Install dependencies</li>
+ ```
+ npm install
+ ```
+ <li>Run</li>
+ # If want to run as development enviroment
+ ```
+ npm run dev 
+ ```
+  # If want to run as production enviroment
+ ```
+ npm start 
+ ```
+</ol>
+
+
 
 <h1>How to Use</h1>
 <p></p>
