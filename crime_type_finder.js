@@ -10,6 +10,5 @@ axios.get(url).then((res) => {
         crimesType.add(crime.primary_type)
     }
 
-    
     console.log(crimesType);
 });
