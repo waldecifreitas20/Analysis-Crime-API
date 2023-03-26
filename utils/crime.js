@@ -62,7 +62,6 @@ module.exports = {
 
         let stats = {
             total: crimes.length,
-
             crimes: {}
         };
 
@@ -100,17 +99,18 @@ module.exports = {
         return stats;
     },
 
-    getAllCrimeStats: function (crimes, period) {
-        let months; 
+    getGeneralStats: function (crimes = [], period = {}) {
+        let months;
         if (period.end == '2022') {
             months = { start: 1, end: 10 };
         } else {
             months = { start: 1, end: 12 };
         }
- 
+
         const yearly_average = calculateYearlyAverage(crimes, period);
-        const monthly_average = yearly_average / (months.end - months.start+1);
+        const monthly_average = yearly_average / (months.end - months.start + 1);
         return {
+            total_crimes: crimes.length,
             first_month: getTotalCrimeByMonth(months.start, crimes),
             last_month: getTotalCrimeByMonth(months.end, crimes),
             yearly_average,

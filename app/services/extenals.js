@@ -1,8 +1,9 @@
 const { getCrimes } = require("../repositories/police_api_repository");
 const { saveCrime } = require("../repositories/crimes_repository");
+const logger = require("../../utils/logger");
 
 
-const formatCrime = crime => {
+const formatCrimeData = crime => {
     return {
         type: crime.primary_type,
         year: crime.year,
@@ -16,36 +17,32 @@ const getMonth = crime => crime.date.split('-')[1];
 
 module.exports = {
     fillDatabase: async function (year, crimeType) {
-        let success = true;
-        let crimes;
+        let crimes; // crimes from Chicago API
 
         try {
             crimes = await getCrimes(year, crimeType.toUpperCase());
         } catch (error) {
-            console.log('Unexpected error ocurred. Wait few minutes and try again');
+            logger.info('UNEXPECTED ERROR HAS OCCURED. ERROR: ' + error);
             return;
         }
 
-        //It saves crimes into database
         let total = crimes.length;
-        let progress = 0;
+        let savingProgress = 0;
         let successful = 0;
 
         for (let i = 0; i < total; i++) {
-            const formatedCrime = formatCrime(crimes[i]);
-            success = await saveCrime(formatedCrime);
-            progress++;
-            if (success) {
+            const formatedCrimeData = formatCrimeData(crimes[i]);
+            //It saves crimes into database
+            let hasSaved = await saveCrime(formatedCrimeData);
+            savingProgress+= 1;
+            if (hasSaved) {
                 successful++;
             }
-            console.log(success + ' || Saving progress: (%)' + (progress / total) * 100);
+            // It shows saving progess in terminal
+            console.log(hasSaved ? 'SUCCESSFUL' : 'FAILURE' +
+                ` || Saving Progress: %${100*(savingProgress/total)}`);
         }
-        console.log('Expected: ' + crimes.length);
-        console.log('Successful: ' + successful);
-
-        return {
-            status: success ? 200 : 400,
-            success,
-        };
+        console.log('TOTAL REACHED: ' + crimes.length);
+        console.log('SAVED SUCCESFULLY: ' + successful);
     }
 }

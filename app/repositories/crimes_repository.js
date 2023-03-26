@@ -1,9 +1,10 @@
 const Crime = require('../models/Crime');
 const { Op } = require('sequelize');
+const logger = require('../../utils/logger');
 
 module.exports = {
 
-    getAll: async function (period) {
+    getAllInAPeriod: async function (period) {
         try {
             return await Crime.findAll({
                 where: {
@@ -11,29 +12,28 @@ module.exports = {
                 },
             });
         } catch (error) {
-            console.log(error);
+            logger.info(error);
             return false;
         }
     },
 
     saveCrime: async function (crime) {
         try {
-            await Crime.create(crime);
+            await Crime.create(crime); // creates a new object into the database
             return true;
         } catch (error) {
             return false;
         }
     },
 
-    advancedSearch: async function (query) {
+    executeQuery: async function (query) {
         try {
             const { database } = require('../../database/sequelize');
             const [result, metadata] = await database.query(query);
-            //console.log(result);
 
             return result;
         } catch (error) {
-              console.log(error);
+            logger.info(error);
             return false;
         }
     }
