@@ -1,5 +1,6 @@
 const controller = require('../app/controllers/crimes');
 const routes = require('./routes');
+const paramsValidator = require('../app/middlewares/validator');
 
 module.exports = function (app) {
     // Use this route to get crime stats of a especific year

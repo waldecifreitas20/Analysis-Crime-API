@@ -5,8 +5,8 @@ const extenalServices = require('../services/extenals');
 
 module.exports = {
     fillDatabase: async function (req, res) {
-        const year = req.query.year;
-        const type = req.params.type;
+        const year = req.params.year;
+        const type = req.params.crimeType;
 
         //Reach data from Chicago API and fill it into the database 
         extenalServices.fillDatabase(year, type);
@@ -15,6 +15,8 @@ module.exports = {
         return res.status(200).send({
             message: 'Request created. It has already been filling the database'
         });
+
+
     },
 
     crimesInYear: async function (req, res) {
