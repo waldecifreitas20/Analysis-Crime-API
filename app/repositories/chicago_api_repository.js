@@ -1,7 +1,5 @@
 const API_URL = process.env.CHICAGO_API_URL;
 const axios = require('axios');
-const https = require('https');
-
 
 module.exports = {
 
