@@ -23,7 +23,7 @@ module.exports = {
         const searchingParams = {
             onlyDomestic: req.query.domestic,
             type: req.query.type,
-            year: req.query.year || 2022,
+            year: req.params.year,
             month: req.query.month,
             period: {
                 start: req.query.start_month || '01',
