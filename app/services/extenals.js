@@ -1,7 +1,6 @@
 const { getCrimes } = require("../repositories/chicago_api_repository");
 const { saveCrime } = require("../repositories/crimes_repository");
 const logger = require("../../utils/logger");
-const path  = require("path")
 
 
 const formatCrimeData = crime => {
