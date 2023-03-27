@@ -21,6 +21,8 @@
 
         5. NOW YOU CAN FIIL YOUR DATABASE WITH DATA FROM THE DATASET YOU HAVE CHOSEN
 
+    IF YOU HAVE ANY DOUBT SEE THE INSTRUCTIONS AT https://github.com/waldecifreitas20/CrimeStats/blob/main/README.md
+    OR OPEN A ISSUE IN THE REPOSITORY PAGE https://github.com/waldecifreitas20/CrimeStats/issues
 */
 
 module.exports = {
