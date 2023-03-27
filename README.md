@@ -14,7 +14,7 @@
   <li><a href="#finding-types-of-crimes">Finding Types of crimes</a></li>
   <li><a href="#fill-your-database">Fill your database</a></li>
   <li><a href="#searching-crimes-statistics-in-a-especific-year">Searching Crimes Statistics in a Especific Year</a> </li>
-  <li><a href="#searching-crimes-statitics-in-all-years">Searching Crimes Statitics in All Years</a> </li>
+  <li><a href="#searching-crimes-statitics-in-all-years">Searching Crimes Statistics in All Years</a> </li>
  </ol> 
  <li><a href="#using-another-dataset">Using Another Dataset</a> </li>
  <li><a href="#project-status">Project Status</a> </li>
@@ -345,7 +345,7 @@ Example of request
 }
 ```
 
-### Searching Crimes Statitics in All Years
+### Searching Crimes Statistics in All Years
 * The base route provides stats of all crimes saved into the database. There is below a example of request:
 ```
  GET /crimes/all
