@@ -380,8 +380,8 @@ Example of request
 {
 	"status": 200,
 	"period": {
-		"start": "2020",
-		"end": "2022"
+	"start": "2020",
+	"end": "2022"
 	},
 	"stats": {
 		"total_crimes": 279490,
@@ -390,7 +390,7 @@ Example of request
 		"yearly_average": 93163.33,
 		"monthly_average": 9316.33,
 		"growth_rate": 30.5
-	}
+}
 }
 ```
 
@@ -398,14 +398,20 @@ Example of request
 ## Using Another Dataset
 If you are not interesting to use data coming from Chicago, you can use another one. Go to file `app/repositories/any_api_repository.js` and make the changes required. Those steps will allow you to use any dataset without make many changes. Follow the steps bellow:
 
-* 1. REPLACE 'URL' FOR THE ONE YOUR WANT. EX: https://mydataset.com/api/data.json
-* 2. REPLACE ATRIBUTES AT FUNCTION 'formatCrimeData'. 
-   EX:  type: crime.type,
-   year: crime.date.year,
-   month: crime.date.month,
-   domestic: false,
-   case_id: crime.id
-
+1. Replace the variable `URL` for your dataset url.
+```javascript
+const URL = "https://mydataset.com/api/data.json"
+```
+3. Replace atributes at ``formatCrimeData`` returning. The atributes must be the same the as your dataset.
+```javascript
+return {
+    type: crime.type,
+    year: crime.date.year,
+    month: crime.date.month,
+    domestic: false,
+    case_id: crime.id
+}
+``` 
 * 3. GO TO FILE externals.js
 * 4. REPLACE THIS LINE:
 ```
