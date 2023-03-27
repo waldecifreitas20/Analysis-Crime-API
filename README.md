@@ -412,17 +412,17 @@ return {
     case_id: crime.id
 }
 ``` 
-* 3. GO TO FILE externals.js
-* 4. REPLACE THIS LINE:
+3. Go to file externals.js
+4. Replace this line:
 ```
    const CRIMES_API = require("../repositories/chicago_api_repository");
 ```
-   FOR THIS ONE:
+...for this:
 ```
    const CRIMES_API = require("../repositories/any_api_repository");
 ```
-5. FOLLOW THE INSTRUCTIONS DEFINED AT <a href+"#how-to-fill-database"><li><a href="#fill-your-database">HERE</a></li> </a>
-6. ITS DONE
+5. Follow the instructions at <a href+"#how-to-fill-database"><li><a href="#fill-your-database">here</a></li> </a>
+6. It is done!
 
 
 ## Project Status
