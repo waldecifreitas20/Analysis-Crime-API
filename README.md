@@ -414,14 +414,14 @@ return {
 ``` 
 3. Go to file externals.js
 4. Replace this line:
-```
+```javascript
    const CRIMES_API = require("../repositories/chicago_api_repository");
 ```
 ...for this:
-```
+```javascript
    const CRIMES_API = require("../repositories/any_api_repository");
 ```
-5. Follow the instructions at <a href+"#how-to-fill-database"><li><a href="#fill-your-database">here</a></li> </a>
+5. Follow the instructions at <a href="#fill-your-database">here</a>
 6. It is done!
 
 
