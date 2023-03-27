@@ -1,6 +1,7 @@
 const { getCrimes } = require("../repositories/police_api_repository");
 const { saveCrime } = require("../repositories/crimes_repository");
 const logger = require("../../utils/logger");
+const path  = require("path")
 
 
 const formatCrimeData = crime => {
@@ -18,13 +19,12 @@ const getMonth = crime => crime.date.split('-')[1];
 module.exports = {
     fillDatabase: async function (year, crimeType) {
         let crimes; // crimes from Chicago API
-
-        try {
+        try { 
             crimes = await getCrimes(year, crimeType.toUpperCase());
         } catch (error) {
-            logger.info('UNEXPECTED ERROR HAS OCCURED. ERROR: ' + error);
+            logger.error('UNEXPECTED ERROR HAS OCCURED. ERROR: ' + error, '/app/services/extenals.js');
             return;
-        }
+        } 
 
         let total = crimes.length;
         let savingProgress = 0;

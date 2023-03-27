@@ -1,6 +1,8 @@
 const Crime = require('../models/Crime');
 const { Op } = require('sequelize');
 const logger = require('../../utils/logger');
+const path = require('path');
+
 
 module.exports = {
 
@@ -33,7 +35,7 @@ module.exports = {
 
             return result;
         } catch (error) {
-            logger.info(error);
+            logger.error(error, path.relative);
             return false;
         }
     }

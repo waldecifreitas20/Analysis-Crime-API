@@ -6,7 +6,7 @@ const extenalServices = require('../services/extenals');
 module.exports = {
     fillDatabase: async function (req, res) {
         const year = req.params.year;
-        const type = req.params.crimeType;
+        const type = req.params.type;
 
         //Reach data from Chicago API and fill it into the database 
         extenalServices.fillDatabase(year, type);
