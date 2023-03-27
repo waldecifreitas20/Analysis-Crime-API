@@ -1,6 +1,10 @@
 const API_URL = process.env.CHICAGO_API_URL;
 const axios = require('axios');
 
+const getMonth = crime => {
+    return crime.date.split('-')[1];
+} 
+
 module.exports = {
 
     getCrimes: async function (year = 2022, crimeType) {
@@ -21,5 +25,17 @@ module.exports = {
         return crimes;
 
 
-    }
+    },
+
+    formatCrimeData: function (crime) {
+        return {
+            type: crime.primary_type,
+            year: crime.year,
+            month: getMonth(crime),
+            domestic: crime.domestic,
+            case_id: crime.case_number
+        }
+    },
+    
+   
 }

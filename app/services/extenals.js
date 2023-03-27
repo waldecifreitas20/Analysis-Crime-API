@@ -1,25 +1,12 @@
-const { getCrimes } = require("../repositories/chicago_api_repository");
+const CRIMES_API = require("../repositories/chicago_api_repository");
 const { saveCrime } = require("../repositories/crimes_repository");
 const logger = require("../../utils/logger");
 
-
-const formatCrimeData = crime => {
-    return {
-        type: crime.primary_type,
-        year: crime.year,
-        month: getMonth(crime),
-        domestic: crime.domestic,
-        case_id: crime.case_number
-    }
-}
-
-const getMonth = crime => crime.date.split('-')[1];
-
 module.exports = {
     fillDatabase: async function (year, crimeType) {
-        let crimes; // crimes from Chicago API
+        let crimes; // crimes from API
         try { 
-            crimes = await getCrimes(year, crimeType.toUpperCase());
+            crimes = await CRIMES_API.getCrimes(year, crimeType.toUpperCase());
         } catch (error) {
             logger.error('UNEXPECTED ERROR HAS OCCURED. ERROR: ' + error, '/app/services/extenals.js');
             return;
@@ -30,7 +17,7 @@ module.exports = {
         let successful = 0;
 
         for (let i = 0; i < total; i++) {
-            const formatedCrimeData = formatCrimeData(crimes[i]);
+            const formatedCrimeData = CRIMES_API.formatCrimeData(crimes[i]);
             //It saves crimes into database
             let hasSaved = await saveCrime(formatedCrimeData);
             savingProgress+= 1;
